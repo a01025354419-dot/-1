@@ -1,0 +1,411 @@
+/* 페이지 UI 스타일 (배경 장면은 scene.css) */
+
+:root {
+  --bg: oklch(13% 0.05 268);
+  --panel: oklch(17% 0.05 272 / 0.78);
+  --panel-line: oklch(100% 0 0 / 0.1);
+  --text: oklch(95% 0.01 100);
+  --muted: oklch(78% 0.03 280);
+  --accent: oklch(82% 0.11 5); /* 꽃잎 분홍 */
+  --leaf: oklch(78% 0.14 150);
+  --warn: oklch(82% 0.14 80);
+  --radius: 18px;
+  --serif: "Gowun Batang", "Noto Serif KR", "Batang", serif;
+  --sans: "Noto Sans KR", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- 상단 바 ---------- */
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(16px, 4vw, 40px);
+  background: linear-gradient(oklch(10% 0.05 268 / 0.7), transparent);
+}
+
+.brand {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 20px;
+}
+
+.topbar nav a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+
+.topbar nav a:hover {
+  color: var(--text);
+}
+
+/* ---------- 본문 공통 ---------- */
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  width: min(1120px, 100% - 32px);
+  margin: 0 auto;
+  padding: 72px 0;
+}
+
+.section-head h2,
+.about h2 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+  letter-spacing: 0.01em;
+}
+
+.section-head p {
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+/* ---------- 히어로 ---------- */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(96px, 17vh, 170px) 20px 0;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 9vw, 5.6rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 30px oklch(10% 0.05 280 / 0.9), 0 0 2px oklch(10% 0.05 280);
+}
+
+.lead {
+  margin: 18px 0 28px;
+  max-width: 34em;
+  color: oklch(90% 0.02 280);
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  text-shadow: 0 1px 14px oklch(10% 0.05 280 / 0.95);
+}
+
+.cta {
+  display: inline-block;
+  padding: 12px 26px;
+  border: 1px solid oklch(100% 0 0 / 0.35);
+  border-radius: 999px;
+  background: oklch(14% 0.05 270 / 0.55);
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s, translate 0.2s;
+}
+
+.cta:hover {
+  background: oklch(24% 0.07 300 / 0.7);
+  border-color: var(--accent);
+  translate: 0 -2px;
+}
+
+/* ---------- 필터 ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.chip {
+  padding: 6px 16px;
+  border: 1px solid var(--panel-line);
+  border-radius: 999px;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.chip:hover {
+  color: var(--text);
+}
+
+.chip[aria-pressed="true"] {
+  color: oklch(15% 0.05 270);
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 500;
+}
+
+/* ---------- 카드 ---------- */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  transition: translate 0.25s, border-color 0.25s;
+}
+
+.card:hover {
+  translate: 0 -4px;
+  border-color: oklch(100% 0 0 / 0.22);
+}
+
+.thumb-box {
+  position: relative;
+  height: 170px;
+  background: radial-gradient(ellipse 70% 80% at 50% 100%, oklch(32% 0.1 150 / 0.5), transparent 70%),
+    oklch(12% 0.05 270 / 0.55);
+  border-bottom: 1px solid var(--panel-line);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  padding: 18px 20px 20px;
+}
+
+.tag {
+  align-self: flex-start;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: oklch(78% 0.14 150 / 0.16);
+  color: var(--leaf);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.card h3 {
+  margin: 6px 0 0;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.latin {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.note {
+  margin: 8px 0 12px;
+  font-size: 0.95rem;
+  color: oklch(88% 0.02 280);
+}
+
+.care {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px 0;
+  border-block: 1px solid var(--panel-line);
+}
+
+.care div {
+  min-width: 0;
+}
+
+.care dt {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.care dd {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.water {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.water-status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.water-status[data-state="ok"] {
+  color: var(--leaf);
+}
+
+.water-status[data-state="due"] {
+  color: var(--warn);
+  font-weight: 500;
+}
+
+.water-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border: 1px solid var(--leaf);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--leaf);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background: var(--leaf);
+  color: oklch(15% 0.05 270);
+}
+
+.btn-text {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.78rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-text:hover {
+  color: var(--text);
+}
+
+/* ---------- 정원사 ---------- */
+.about {
+  max-width: 720px;
+  text-align: center;
+  padding-bottom: 96px;
+}
+
+.about p {
+  padding: 24px 28px;
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  text-decoration: none;
+  color: var(--accent);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.links a:hover {
+  border-color: var(--accent);
+}
+
+.footer {
+  padding: 24px 16px 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  background: linear-gradient(transparent, oklch(10% 0.05 268 / 0.8));
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .care {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .topbar nav {
+    gap: 14px;
+  }
+}
