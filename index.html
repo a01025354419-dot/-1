@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>나만의 정원</title>
+    <meta name="description" content="내가 가꾸는 식물들을 모아 둔 나만의 작은 정원" />
+    <meta name="theme-color" content="#1b1636" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./scene.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <!-- 픽셀 정원 배경 (scene.css 가 그립니다) -->
+    <div class="scene" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#top">나만의 정원</a>
+      <nav aria-label="주요 메뉴">
+        <a href="#plants">식물들</a>
+        <a href="#about">정원사</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <p class="eyebrow">MY LITTLE GARDEN</p>
+        <h1>나만의 정원</h1>
+        <p class="lead">내가 가꾸는 식물들을 모아 둔 작은 밤 정원이에요.<br />천천히 둘러보세요.</p>
+        <a class="cta" href="#plants">식물 만나러 가기</a>
+      </section>
+
+      <section id="plants" class="section" aria-labelledby="plants-title">
+        <div class="section-head">
+          <h2 id="plants-title">정원 식구들</h2>
+          <p>지금 함께 지내고 있는 식물들이에요. 물을 준 날을 기록해 두면 다음 차례를 알려 드려요.</p>
+        </div>
+        <div class="filters" id="filters" role="group" aria-label="식물 종류 필터"></div>
+        <ul class="grid" id="plant-grid"></ul>
+      </section>
+
+      <section id="about" class="section about" aria-labelledby="about-title">
+        <h2 id="about-title">정원사</h2>
+        <p>
+          안녕하세요, 이 정원을 가꾸는 사람이에요.
+          <!-- 아래 문장을 직접 소개로 바꿔 주세요 -->
+          식물과 함께 지내며 알게 된 것들을 이곳에 천천히 기록하고 있어요.
+        </p>
+        <ul class="links">
+          <li><a href="mailto:hello@example.com">이메일</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2026 나만의 정원</p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
